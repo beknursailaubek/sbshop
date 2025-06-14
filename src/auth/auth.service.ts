@@ -49,11 +49,7 @@ export class AuthService {
 		if (!result) throw new UnauthorizedException('Невалидный refresh токен')
 
 		const user = await this.userService.getById(result.id)
-
-		if (!user) {
-			throw new UnauthorizedException('Пользователь не найден')
-		}
-
+		
 		const tokens = this.issueTokens(user.id)
 
 		return { user, ...tokens }
